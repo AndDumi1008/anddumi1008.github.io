@@ -313,6 +313,67 @@ body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px)); }
   .rail a:last-child { border-top: 0; }
 }
 
+/* ---------- interactions (all gated on .js so no-JS readers see everything) ---------- */
+
+/* scroll progress: paints over the header's bottom rule */
+.progress { position: absolute; left: 0; bottom: calc(-1 * var(--rule)); height: var(--rule); width: 0; background: var(--accent); pointer-events: none; }
+
+/* hero easter egg */
+.break { all: unset; cursor: pointer; text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .08em; text-decoration-color: var(--accent); }
+.break:hover { color: var(--accent); }
+.break:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+@keyframes shake { 10%, 90% { transform: translate(-2px, 0) } 20%, 80% { transform: translate(4px, 0) } 30%, 50%, 70% { transform: translate(-6px, 1px) } 40%, 60% { transform: translate(6px, -1px) } }
+.hero.shake { animation: shake .55s cubic-bezier(.36,.07,.19,.97) both; }
+
+/* gate: slide to open */
+.gate { border-bottom: var(--rule) solid var(--line); padding: 18px var(--gutter); background: var(--surface); overflow: hidden; transition: padding .4s ease, max-height .4s ease; max-height: 160px; }
+.gate.collapsed { max-height: 0; padding-top: 0; padding-bottom: 0; border-bottom-width: 0; }
+.gate-track { position: relative; height: 64px; border: var(--rule) solid var(--line); background: var(--bg); display: flex; align-items: center; justify-content: center; max-width: 720px; cursor: pointer; }
+.gate-label { color: var(--muted); pointer-events: none; transition: opacity .15s; }
+.gate-label::after { content: " →"; color: var(--accent); }
+.gate.done .gate-label::after { content: ""; }
+.gate-knob { position: absolute; left: 4px; top: 4px; width: 56px; height: 52px; border: var(--rule) solid var(--line); background: var(--ink); color: var(--bg); font-family: var(--display); font-weight: 900; font-size: 22px; cursor: grab; touch-action: none; user-select: none; padding: 0; transition: transform .25s ease; box-shadow: 4px 4px 0 var(--accent); }
+.gate-knob.grab { cursor: grabbing; transition: none; }
+.gate.done .gate-knob { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+.gate.done .gate-track { border-color: var(--accent); }
+
+.js #work.locked .row { filter: blur(7px); pointer-events: none; user-select: none; transition: filter .5s ease; }
+#work .row { transition: filter .5s ease, opacity .3s ease; }
+.js #work.locked .section-head { cursor: pointer; }
+
+/* experience veil */
+#experience { position: relative; }
+.js #experience.veiled .row { filter: blur(6px); user-select: none; pointer-events: none; transition: filter .5s ease; }
+#experience .row { transition: filter .5s ease, opacity .3s ease; }
+.veil { position: sticky; top: 36vh; height: 0; overflow: visible; z-index: 5; display: grid; justify-items: center; align-content: start; gap: 14px; padding: 0 var(--gutter); transition: opacity .4s ease; }
+.veil p { color: var(--muted); background: var(--bg); padding: 4px 8px; }
+.veil.gone { opacity: 0; pointer-events: none; }
+
+/* stack tag filter */
+.tags button { all: unset; cursor: pointer; display: block; padding: 3px 8px; margin: -3px -8px; }
+.tags li:has(button) { padding: 0; }
+.tags li:has(button) button { padding: 3px 8px; margin: 0; }
+.tags button:hover, .tags button.on { background: var(--ink); color: var(--bg); }
+.tags button.on { box-shadow: 3px 3px 0 var(--accent); }
+.tags button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.filter-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 12px var(--gutter); border-bottom: var(--rule) solid var(--line); background: var(--ink); color: var(--bg); position: sticky; top: 60px; z-index: 15; }
+.filter-bar a, .filter-bar button { all: unset; cursor: pointer; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; font: inherit; letter-spacing: inherit; text-transform: inherit; }
+.filter-bar button { margin-left: auto; color: var(--bg); }
+.row.dim { opacity: .28; }
+.row.match { background: var(--surface); box-shadow: inset 6px 0 0 var(--accent); }
+
+/* stamp + confetti */
+.stamp { position: fixed; right: 16px; bottom: calc(60px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: var(--bg); color: var(--accent); border: var(--rule) solid var(--accent); padding: 10px 14px; transform: rotate(-4deg) translateY(20px); opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none; max-width: min(320px, calc(100vw - 32px)); text-align: center; }
+.stamp.show { opacity: 1; transform: rotate(-4deg) translateY(0); }
+@media (min-width: 1280px) { .stamp { bottom: 24px; } }
+.confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; display: none; }
+.confetti.on { display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gate, .gate-knob, #work .row, #experience .row, .veil, .stamp { transition: none; }
+  .hero.shake { animation: none; }
+}
+
 /* ---------- footer ---------- */
 .site-footer {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;

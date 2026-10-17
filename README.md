@@ -10,6 +10,7 @@ Plain HTML and CSS, no framework and no build step. GitHub Pages serves the `mai
 | --- | --- |
 | `index.html` | The whole site: hero, work, experience, stack, contact |
 | `css/styles.css` | All styles. Design tokens are at the top of the file |
+| `js/site.js` | Interactions: slide-to-open gate, experience veil, stack tag filter, scroll progress, confetti. Without JS everything is simply visible |
 | `assets/andrei-*.{webp,jpg}` | Profile photo, 480 and 960 px |
 | `assets/Andrei_Dumitrescu_CV.pdf` | Downloadable CV, linked from the hero and the contact section |
 | `assets/og.png` | Open Graph preview image (1200×630) shown when the link is shared |

@@ -62,6 +62,7 @@
     </ul>
     <div class="status mono"><i aria-hidden="true"></i>Available · Oct 2026</div>
   </nav>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 </header>
 
 <aside class="rail mono" aria-label="Social links">
@@ -75,7 +76,7 @@
   <section class="hero" id="top" aria-labelledby="hero-title">
     <div class="hero-text">
       <p class="eyebrow mono">Software engineer · Timișoara, Romania</p>
-      <h1 id="hero-title">I build backend systems. Then I try to break them.</h1>
+      <h1 id="hero-title">I build backend systems. Then I try to <button class="break" type="button" id="break-btn" title="Go on, try">break them.</button></h1>
       <p class="lede">Java and TypeScript in production since 2022. Most recently technical lead on an AI product with 2,800+ users: backend, payments, release pipeline, and the on-call for all of it.</p>
       <div class="actions">
         <a class="btn" href="#work">See the work</a>
@@ -99,8 +100,15 @@
     <div><dt class="mono">Last role</dt><dd>Technical Lead, ZettaSource</dd></div>
   </dl>
 
+  <div class="gate" id="gate" hidden>
+    <div class="gate-track" id="gate-track">
+      <span class="gate-label mono" id="gate-label">Slide to open the work</span>
+      <button class="gate-knob" type="button" id="gate-knob" aria-label="Open the work section">→</button>
+    </div>
+  </div>
+
   <section id="work" aria-labelledby="work-title">
-    <header class="section-head"><h2 id="work-title">Work</h2><span class="mono">4 selected</span></header>
+    <header class="section-head"><h2 id="work-title">Work</h2><span class="mono" id="work-count">4 selected</span></header>
 
     <article class="row highlight">
       <span class="num mono" aria-hidden="true">01</span>
@@ -151,6 +159,10 @@
 
   <section id="experience" aria-labelledby="exp-title">
     <header class="section-head"><h2 id="exp-title">Experience</h2><span class="mono">2022 → 2026</span></header>
+    <div class="veil" id="exp-veil" hidden>
+      <p class="mono">Not sure yet?</p>
+      <button class="btn" type="button" id="exp-open">Read my work experience →</button>
+    </div>
 
     <article class="row">
       <span class="num mono" aria-hidden="true">—</span>
@@ -197,16 +209,21 @@
   </section>
 
   <section id="stack" aria-labelledby="stack-title">
-    <header class="section-head"><h2 id="stack-title">Stack</h2><span class="mono">What I ship with</span></header>
-    <div class="stack-grid">
-      <div><h3 class="mono">Languages</h3><ul class="tags mono"><li>Java</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li><li>Scala</li><li>Rust</li><li>Python</li></ul></div>
-      <div><h3 class="mono">Backend</h3><ul class="tags mono"><li>Spring Boot</li><li>Node.js</li><li>Deno</li><li>Hibernate / JPA</li><li>Kafka</li><li>WebSockets</li><li>REST / SOAP</li><li>BPMN 2.0</li><li>FastAPI</li></ul></div>
-      <div><h3 class="mono">Data</h3><ul class="tags mono"><li>PostgreSQL</li><li>Supabase</li><li>MSSQL</li><li>Oracle</li><li>MongoDB</li></ul></div>
-      <div><h3 class="mono">Frontend &amp; mobile</h3><ul class="tags mono"><li>React</li><li>Vite</li><li>Next.js</li><li>Tailwind</li><li>Capacitor</li></ul></div>
-      <div><h3 class="mono">Infrastructure</h3><ul class="tags mono"><li>Docker</li><li>Kubernetes</li><li>Helm</li><li>AWS</li><li>GitHub Actions</li><li>Jenkins</li><li>SonarQube</li><li>Nexus</li><li>Azure DevOps</li><li>Grafana</li><li>Linux</li></ul></div>
-      <div><h3 class="mono">Testing</h3><ul class="tags mono"><li>JUnit</li><li>Mockito</li><li>Rest Assured</li><li>Vitest</li><li>Maestro</li><li>Selenium</li><li>Cucumber</li></ul></div>
-      <div><h3 class="mono">Product &amp; AI</h3><ul class="tags mono"><li>OpenAI</li><li>Whisper</li><li>ElevenLabs</li><li>RevenueCat</li><li>PostHog</li><li>OneSignal</li><li>Claude Code</li></ul></div>
-      <div><h3 class="mono">Ways of working</h3><ul class="tags mono"><li>Scrum / Agile</li><li>Code review</li><li>Tech leadership</li><li>Release engineering</li></ul></div>
+    <header class="section-head"><h2 id="stack-title">Stack</h2><span class="mono" id="stack-hint">Tap a tag to see where I used it</span></header>
+    <div class="filter-bar mono" id="filter-bar" hidden>
+      <span id="filter-text"></span>
+      <a href="#work" id="filter-jump">Show them ↑</a>
+      <button type="button" id="filter-clear">Clear ×</button>
+    </div>
+    <div class="stack-grid" id="stack-grid">
+      <div><h3 class="mono">Languages</h3><ul class="tags mono"><li><button type="button">Java</button></li><li><button type="button">TypeScript</button></li><li><button type="button">JavaScript</button></li><li><button type="button">SQL</button></li><li><button type="button">Scala</button></li><li><button type="button">Rust</button></li><li><button type="button">Python</button></li></ul></div>
+      <div><h3 class="mono">Backend</h3><ul class="tags mono"><li><button type="button">Spring Boot</button></li><li><button type="button">Node.js</button></li><li><button type="button">Deno</button></li><li><button type="button">Hibernate / JPA</button></li><li><button type="button">Kafka</button></li><li><button type="button">WebSockets</button></li><li><button type="button">REST / SOAP</button></li><li><button type="button">BPMN 2.0</button></li><li><button type="button">FastAPI</button></li></ul></div>
+      <div><h3 class="mono">Data</h3><ul class="tags mono"><li><button type="button">PostgreSQL</button></li><li><button type="button">Supabase</button></li><li><button type="button">MSSQL</button></li><li><button type="button">Oracle</button></li><li><button type="button">MongoDB</button></li></ul></div>
+      <div><h3 class="mono">Frontend &amp; mobile</h3><ul class="tags mono"><li><button type="button">React</button></li><li><button type="button">Vite</button></li><li><button type="button">Next.js</button></li><li><button type="button">Tailwind</button></li><li><button type="button">Capacitor</button></li></ul></div>
+      <div><h3 class="mono">Infrastructure</h3><ul class="tags mono"><li><button type="button">Docker</button></li><li><button type="button">Kubernetes</button></li><li><button type="button">Helm</button></li><li><button type="button">AWS</button></li><li><button type="button">GitHub Actions</button></li><li><button type="button">Jenkins</button></li><li><button type="button">SonarQube</button></li><li><button type="button">Nexus</button></li><li><button type="button">Azure DevOps</button></li><li><button type="button">Grafana</button></li><li><button type="button">Linux</button></li></ul></div>
+      <div><h3 class="mono">Testing</h3><ul class="tags mono"><li><button type="button">JUnit</button></li><li><button type="button">Mockito</button></li><li><button type="button">Rest Assured</button></li><li><button type="button">Vitest</button></li><li><button type="button">Maestro</button></li><li><button type="button">Selenium</button></li><li><button type="button">Cucumber</button></li></ul></div>
+      <div><h3 class="mono">Product &amp; AI</h3><ul class="tags mono"><li><button type="button">OpenAI</button></li><li><button type="button">Whisper</button></li><li><button type="button">ElevenLabs</button></li><li><button type="button">RevenueCat</button></li><li><button type="button">PostHog</button></li><li><button type="button">OneSignal</button></li><li><button type="button">Claude Code</button></li></ul></div>
+      <div><h3 class="mono">Ways of working</h3><ul class="tags mono"><li><button type="button">Scrum / Agile</button></li><li><button type="button">Code review</button></li><li><button type="button">Tech leadership</button></li><li><button type="button">Release engineering</button></li></ul></div>
     </div>
   </section>
 
@@ -234,8 +251,9 @@
   <span>Plain HTML and CSS, no framework. <a href="https://github.com/AndDumi1008/anddumi1008.github.io" target="_blank" rel="noopener">Source ↗</a></span>
 </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+<canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+<div class="stamp mono" id="stamp" role="status" aria-live="polite"></div>
+
+<script src="js/site.js" defer></script>
 </body>
 </html>
