@@ -60,6 +60,7 @@
       <li><a href="#stack">Stack</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <span class="counter mono" id="counter" aria-live="polite">01 / 05</span>
     <div class="status mono"><i aria-hidden="true"></i>Available · Oct 2026</div>
   </nav>
   <div class="progress" id="progress" aria-hidden="true"></div>
@@ -73,7 +74,7 @@
 </aside>
 
 <main id="main">
-  <section class="hero" id="top" aria-labelledby="hero-title">
+  <section class="hero slide" id="top" data-title="Intro" aria-labelledby="hero-title">
     <div class="hero-text">
       <p class="eyebrow mono">Software engineer · Timișoara, Romania</p>
       <h1 id="hero-title">I build backend systems. Then I try to <button class="break" type="button" id="break-btn" title="Go on, try">break them.</button></h1>
@@ -93,6 +94,7 @@
     </div>
   </section>
 
+  <div class="slide" id="s-work" data-title="Work">
   <dl class="spec">
     <div><dt class="mono">Status</dt><dd>Available immediately, full-time or contract</dd></div>
     <div><dt class="mono">Location</dt><dd>Timișoara · remote · EU work authorization</dd></div>
@@ -156,8 +158,9 @@
       </div>
     </article>
   </section>
+  </div>
 
-  <section id="experience" aria-labelledby="exp-title">
+  <section id="experience" class="slide" data-title="Experience" aria-labelledby="exp-title">
     <header class="section-head"><h2 id="exp-title">Experience</h2><span class="mono">2022 → 2026</span></header>
     <div class="veil" id="exp-veil" hidden>
       <p class="mono">Not sure yet?</p>
@@ -208,7 +211,7 @@
     </article>
   </section>
 
-  <section id="stack" aria-labelledby="stack-title">
+  <section id="stack" class="slide" data-title="Stack" aria-labelledby="stack-title">
     <header class="section-head"><h2 id="stack-title">Stack</h2><span class="mono" id="stack-hint">Tap a tag to see where I used it</span></header>
     <div class="filter-bar mono" id="filter-bar" hidden>
       <span id="filter-text"></span>
@@ -227,6 +230,7 @@
     </div>
   </section>
 
+  <div class="slide" id="s-contact" data-title="Contact">
   <section id="contact" aria-labelledby="contact-title">
     <header class="section-head"><h2 id="contact-title">Let's talk</h2><span class="mono">Replies within a day</span></header>
     <div class="contact-grid">
@@ -244,12 +248,14 @@
       </div>
     </div>
   </section>
+  <footer class="site-footer mono">
+    <span>© <span id="year">2026</span> Andrei Dumitrescu</span>
+    <span>Plain HTML and CSS, no framework. <a href="https://github.com/AndDumi1008/anddumi1008.github.io" target="_blank" rel="noopener">Source ↗</a></span>
+  </footer>
+  </div>
 </main>
 
-<footer class="site-footer mono">
-  <span>© <span id="year">2026</span> Andrei Dumitrescu</span>
-  <span>Plain HTML and CSS, no framework. <a href="https://github.com/AndDumi1008/anddumi1008.github.io" target="_blank" rel="noopener">Source ↗</a></span>
-</footer>
+<nav class="slides-nav mono" id="slides-nav" aria-label="Slides" hidden></nav>
 
 <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
 <div class="stamp mono" id="stamp" role="status" aria-live="polite"></div>

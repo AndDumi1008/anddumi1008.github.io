@@ -175,6 +175,55 @@
     stamp('Kidding. 470+ tests say otherwise.');
   });
 
+  /* ---------- slides: one section per screen ---------- */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var snav = $('slides-nav'), counter = $('counter'), current = 0;
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  slides.forEach(function (s, i) {
+    var a = document.createElement('a');
+    a.href = '#' + s.id; a.textContent = pad(i + 1); a.title = s.getAttribute('data-title') || ''; a.setAttribute('aria-label', 'Slide ' + (i + 1) + ': ' + a.title);
+    snav.appendChild(a);
+  });
+  var nextBtn = document.createElement('a');
+  nextBtn.href = '#' + (slides[1] ? slides[1].id : slides[0].id); nextBtn.className = 'next'; nextBtn.textContent = '↓'; nextBtn.setAttribute('aria-label', 'Next slide');
+  snav.appendChild(nextBtn);
+  snav.hidden = false;
+  var navLinks = Array.prototype.slice.call(snav.querySelectorAll('a:not(.next)'));
+
+  function setCurrent(i) {
+    current = i;
+    navLinks.forEach(function (a, k) { a.classList.toggle('on', k === i); });
+    counter.textContent = pad(i + 1) + ' / ' + pad(slides.length);
+    nextBtn.href = '#' + slides[Math.min(slides.length - 1, i + 1)].id;
+    nextBtn.style.visibility = i === slides.length - 1 ? 'hidden' : '';
+  }
+  function whichSlide() {
+    var line = window.innerHeight * .4, best = 0;
+    slides.forEach(function (s, i) { if (s.getBoundingClientRect().top <= line) best = i; });
+    return best;
+  }
+  window.addEventListener('scroll', function () { var i = whichSlide(); if (i !== current) setCurrent(i); }, { passive: true });
+  setCurrent(whichSlide());
+
+  function go(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    slides[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }
+  document.addEventListener('keydown', function (e) {
+    var t = e.target;
+    if (e.altKey || e.ctrlKey || e.metaKey || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+    var s = slides[current], r = s.getBoundingClientRect(), headerH = 60, vh = window.innerHeight;
+    var moreBelow = r.bottom > vh + 8, moreAbove = r.top < headerH - 8;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
+      e.preventDefault();
+      if (moreBelow) window.scrollBy({ top: Math.min(r.bottom - vh, vh * .8), behavior: reduce ? 'auto' : 'smooth' }); else go(current + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
+      e.preventDefault();
+      if (moreAbove) window.scrollBy({ top: -Math.min(headerH - r.top, vh * .8), behavior: reduce ? 'auto' : 'smooth' }); else go(current - 1);
+    } else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+  });
+
   /* ---------- CV download: a small reward ---------- */
   document.querySelectorAll('a[download]').forEach(function (a) {
     a.addEventListener('click', function () { var c = centerOf(a); confetti(c.x, c.y, 50); stamp('Thanks for reading. Talk soon?'); });
