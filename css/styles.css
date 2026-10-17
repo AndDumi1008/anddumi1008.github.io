@@ -250,12 +250,12 @@ h1 {
 
 /* ---------- contact ---------- */
 .contact-grid { display: grid; grid-template-columns: 1fr; border-bottom: var(--rule) solid var(--line); }
-.contact-direct, .contact-form {
+.contact-direct {
   padding: 28px var(--gutter);
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   display: grid; gap: 16px; align-content: start; min-width: 0;
 }
-.contact-direct { border-bottom: var(--rule) solid var(--line); }
+.contact-direct:first-child { border-bottom: var(--rule) solid var(--line); }
 .label { color: var(--muted); }
 .mail {
   font-family: var(--display); font-weight: 900; font-stretch: 100%;
@@ -267,25 +267,9 @@ h1 {
 .links a { color: var(--muted); text-decoration: none; border-bottom: 2px solid var(--line); padding-bottom: 2px; }
 .links a:hover { color: var(--ink); border-bottom-color: var(--accent); }
 
-.contact-form { margin: 0; }
-.field { display: grid; gap: 6px; }
-.field label { color: var(--muted); }
-input, textarea {
-  font: inherit; color: var(--ink);
-  background: var(--surface);
-  border: var(--rule) solid var(--line);
-  padding: 10px 12px; width: 100%;
-  border-radius: 0; -webkit-appearance: none;
-}
-textarea { resize: vertical; min-height: 120px; }
-input:focus, textarea:focus { outline: 3px solid var(--accent); outline-offset: 0; }
-.gotcha { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-.form-note { color: var(--muted); text-transform: none; letter-spacing: 0; font-size: 13px; min-height: 1.2em; }
-.form-note a { color: var(--ink); }
-
 @media (min-width: 760px) {
-  .contact-grid { grid-template-columns: 1fr 1fr; }
-  .contact-direct { border-bottom: 0; border-right: var(--rule) solid var(--line); }
+  .contact-grid { grid-template-columns: 1.4fr 1fr; }
+  .contact-direct:first-child { border-bottom: 0; border-right: var(--rule) solid var(--line); }
 }
 
 /* ---------- footer ---------- */

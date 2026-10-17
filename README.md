@@ -20,7 +20,6 @@ Plain HTML and CSS, no framework and no build step. GitHub Pages serves the `mai
 
 - **Content** lives in `index.html`. Each project and role is one `<article class="row">`.
 - **Colors and type** are CSS custom properties in the `:root` block of `css/styles.css`.
-- **Contact form** posts to Formspree. Create a form at <https://formspree.io>, then replace `YOUR_FORM_ID` in the `action` attribute of `#contact-form`. Until then the form falls back to a `mailto:` link.
 - **CV**: replace `assets/Andrei_Dumitrescu_CV.pdf` with a new export; the file name is referenced in two places in `index.html`.
 
 ## Local preview
