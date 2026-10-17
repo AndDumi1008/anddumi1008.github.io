@@ -112,7 +112,7 @@
   });
   track.addEventListener('click', function (e) { if (e.target === track || e.target === label) openWork(); });
   work.addEventListener('click', function () { openWork(work.querySelector('.section-head')); });
-  document.querySelectorAll('a[href="#work"]').forEach(function (a) { a.addEventListener('click', function () { openWork(); }); });
+  document.querySelectorAll('a[href="#work"], .toc a').forEach(function (a) { a.addEventListener('click', function () { openWork(); }); });
 
   /* ---------- experience: behind a veil until asked ---------- */
   var exp = $('experience'), veil = $('exp-veil'), expBtn = $('exp-open'), expOpen = false;
